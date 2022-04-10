@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">RealTipCalculator</string>
+    <string name="total_bill">Total Bill</string>
+    <string name="calculate">Calculate</string>
+    <string name="real_tip">Real Tip</string>
+    <string name="round_up">Round Up</string>
+</resources>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="8dp"
+    tools:context=".MainActivity">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/total_bill"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/total_bill"
+
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/total_bill_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/subtotal_bill"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/total_bill"
+        android:layout_marginTop="10dp"
+        android:hint="Subtotal"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/subtotal_bill_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:enabled="false"
+            android:textColor="@color/black"
+            android:inputType="numberDecimal" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        style="@style/Widget.RealTipCalculator.CompoundButton.Switch"
+        android:id="@+id/real_tip_switch"
+        android:text="@string/real_tip"
+        app:layout_constraintTop_toTopOf="@id/total_bill"
+        app:layout_constraintBottom_toBottomOf="@id/total_bill"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        style="@style/Widget.RealTipCalculator.CompoundButton.Switch"
+        android:id="@+id/round_up_switch"
+        android:text="@string/round_up"
+        app:layout_constraintTop_toTopOf="@id/subtotal_bill"
+        app:layout_constraintBottom_toBottomOf="@id/subtotal_bill"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tip_text"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        tools:text="Tip Amount: $69"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/subtotal_bill" />
+
+    <Button
+        android:id="@+id/calculate_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/calculate"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/tip_text"
+        tools:layout_editor_absoluteX="0dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
