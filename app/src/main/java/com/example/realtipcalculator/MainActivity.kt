@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import com.google.android.material.slider.Slider
 import org.w3c.dom.Text
 import java.text.NumberFormat
 
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         val totalBill = findViewById<TextView>(R.id.total_bill_edit_text)
         calculateButton.setOnClickListener{
             calculateSubtotal()
+            calculateTip()
         }
 
     }
@@ -37,12 +39,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun calculateTip(){
+        val totalBill = getTotal() ?: return
+        val tipSlider = findViewById<Slider>(R.id.tip_slider)
+        val tipDisplay = findViewById<TextView>(R.id.tip_text)
 
+        val tipPercent = tipSlider.value / 100
+        val tip = NumberFormat.getCurrencyInstance().format(totalBill * tipPercent)
+
+        if (tipPercent.toDouble() == 0.00) {
+            tipDisplay.text = ""
+        } else {
+            tipDisplay.text = "Tip Amount: ${tip}"
+        }
+
+        
     }
 
-    private fun displayTip(tip: Double){
-
-    }
 
 
 
