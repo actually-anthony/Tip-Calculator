@@ -4,4 +4,7 @@
     <string name="calculate">Calculate</string>
     <string name="real_tip">Real Tip</string>
     <string name="round_up">Round Up</string>
+    <string name="tenPercent">10%</string>
+    <string name="fifteenPercent">15%</string>
+    <string name="custom">Custom</string>
 </resources>

@@ -15,11 +15,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val calculateButton = findViewById<Button>(R.id.calculate_button)
-        val totalBill = findViewById<TextView>(R.id.total_bill_edit_text)
+
+
         calculateButton.setOnClickListener{
             calculateSubtotal()
-            calculateTip()
+
         }
+
+
 
     }
 
@@ -38,22 +41,33 @@ class MainActivity : AppCompatActivity() {
         return stringInTextField.toDoubleOrNull()
     }
 
-    private fun calculateTip(){
-        val totalBill = getTotal() ?: return
-        val tipSlider = findViewById<Slider>(R.id.tip_slider)
+//    private fun calculateTip(){
+//        val totalBill = getTotal() ?: return
+//        val tipSlider = findViewById<Slider>(R.id.tip_slider)
+//        val tipDisplay = findViewById<TextView>(R.id.tip_text)
+//
+//        val tipPercent = tipSlider.value / 100
+//        val tip = NumberFormat.getCurrencyInstance().format(totalBill * tipPercent)
+//
+//        if (tipPercent.toDouble() == 0.00) {
+//            tipDisplay.text = ""
+//        } else {
+//            tipDisplay.text = "Tip Amount: ${tip}"
+//        }
+//
+//
+//    }
+
+    private fun test(value: Float){
+//        val tipSlider = findViewById<Slider>(R.id.tip_slider)
         val tipDisplay = findViewById<TextView>(R.id.tip_text)
+//        tipDisplay.text = tipSlider.value.toString()
 
-        val tipPercent = tipSlider.value / 100
-        val tip = NumberFormat.getCurrencyInstance().format(totalBill * tipPercent)
-
-        if (tipPercent.toDouble() == 0.00) {
-            tipDisplay.text = ""
-        } else {
-            tipDisplay.text = "Tip Amount: ${tip}"
-        }
-
-        
     }
+
+    //TODO: tip percentage text view
+    //TODO: Real tip and Round up
+    //TODO: Close keyboard after pressing calculate
 
 
 
