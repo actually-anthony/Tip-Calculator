@@ -13,29 +13,25 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val btn_calculate = findViewById<Button>(R.id.calculate_button)
+        val calculateButton = findViewById<Button>(R.id.calculate_button)
         val totalBill = findViewById<TextView>(R.id.total_bill_edit_text)
-        btn_calculate.setOnClickListener{
+        calculateButton.setOnClickListener{
             calculate()
         }
 
 
     }
 
-    fun calculate(){
+    private fun calculate(){
         val stringInTextField = findViewById<TextView>(R.id.total_bill_edit_text).text.toString()
-        // make double or null
-        Log.i("Anth", stringInTextField)
-
-        val totalBill = stringInTextField.toDouble()
         val subTotalBill = findViewById<TextView>(R.id.subtotal_bill_edit_text)
-
+        // return if input is empty
+        val totalBill = stringInTextField.toDoubleOrNull() ?: return
         val subTotal = totalBill/1.13
-        val formattedSubTotal = NumberFormat.getCurrencyInstance().format(subTotal)
-        println(subTotal)
 
-
-        subTotalBill.text = formattedSubTotal
+        subTotalBill.text = NumberFormat.getCurrencyInstance().format(subTotal)
     }
+
+    
 
 }
