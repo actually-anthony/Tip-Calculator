@@ -5,24 +5,33 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import com.example.realtipcalculator.databinding.ActivityMainBinding
 import com.google.android.material.slider.Slider
 import org.w3c.dom.Text
 import java.text.NumberFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val calculateButton = findViewById<Button>(R.id.calculate_button)
-
-
-        calculateButton.setOnClickListener{
+//        binding.calculateButton.setOnClickListener{calculateSubtotal()}
+        binding.zeroPercentButton.setOnClickListener{
             calculateSubtotal()
-
-        }
-
-
+            calculateTip(0.0)}
+        binding.tenPercentButton.setOnClickListener{
+            calculateSubtotal()
+            calculateTip(0.1)}
+        binding.fifthteenPercentButton.setOnClickListener{
+            calculateSubtotal()
+            calculateTip(0.15)}
+//        binding.customPercentButton.setOnClickListener{
+//            calculateSubtotal()
+//            calculateTip(0.0)}
 
     }
 
@@ -41,22 +50,17 @@ class MainActivity : AppCompatActivity() {
         return stringInTextField.toDoubleOrNull()
     }
 
-//    private fun calculateTip(){
-//        val totalBill = getTotal() ?: return
-//        val tipSlider = findViewById<Slider>(R.id.tip_slider)
-//        val tipDisplay = findViewById<TextView>(R.id.tip_text)
-//
-//        val tipPercent = tipSlider.value / 100
-//        val tip = NumberFormat.getCurrencyInstance().format(totalBill * tipPercent)
-//
-//        if (tipPercent.toDouble() == 0.00) {
-//            tipDisplay.text = ""
-//        } else {
-//            tipDisplay.text = "Tip Amount: ${tip}"
-//        }
-//
-//
-//    }
+    private fun calculateTip(tipPercent: Double){
+        Log.i("Anth","I made it here")
+        val totalBill = getTotal() ?: return
+        val tip = NumberFormat.getCurrencyInstance().format(totalBill * tipPercent)
+
+        binding.tipPercentDisplay.text = when (tipPercent){
+            0.00 -> "No Tip"
+            else -> "Tip Selected: ${NumberFormat.getPercentInstance(Locale.CANADA).format(tipPercent)}"
+        }
+
+    }
 
     private fun test(value: Float){
 //        val tipSlider = findViewById<Slider>(R.id.tip_slider)

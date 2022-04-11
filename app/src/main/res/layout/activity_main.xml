@@ -72,7 +72,7 @@
     <TextView
         android:id="@+id/tip_percent_display"
         android:text="Tip Percent: "
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -86,7 +86,7 @@
         app:layout_constraintEnd_toStartOf="@id/ten_percent_button"
         app:layout_constraintTop_toBottomOf="@id/tip_percent_display"
         android:layout_marginEnd="15dp"
-        android:text="@string/tenPercent"
+        android:text="@string/zeroPercent"
         />
 
     <Button
@@ -95,22 +95,22 @@
         app:layout_constraintStart_toEndOf="@id/zero_percent_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/zero_percent_button"
-        android:text="@string/fifteenPercent" />
+        android:text="@string/tenPercent" />
 
     <Button
-        android:id="@+id/twenty_percent_button"
+        android:id="@+id/fifthteen_percent_button"
         style="@style/Widget.RealTipCalculator.Button.OutlinedButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/custom_percent_button"
         app:layout_constraintTop_toBottomOf="@id/ten_percent_button"
         android:layout_marginEnd="15dp"
-        android:text="20%"
+        android:text="@string/fifteenPercent"
         />
     <Button
         android:id="@+id/custom_percent_button"
         style="@style/Widget.RealTipCalculator.Button.OutlinedButton"
-        app:layout_constraintStart_toEndOf="@id/twenty_percent_button"
-        app:layout_constraintTop_toTopOf="@id/twenty_percent_button"
+        app:layout_constraintStart_toEndOf="@id/fifthteen_percent_button"
+        app:layout_constraintTop_toTopOf="@id/fifthteen_percent_button"
         app:layout_constraintEnd_toEndOf="parent"
         android:textSize="32sp"
         android:text="@string/custom"
@@ -121,7 +121,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/calculate"
-        app:layout_constraintTop_toBottomOf="@+id/twenty_percent_button"
+        app:layout_constraintTop_toBottomOf="@+id/fifthteen_percent_button"
         tools:layout_editor_absoluteX="-16dp" />
 
     <TextView

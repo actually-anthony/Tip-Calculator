@@ -7,4 +7,5 @@
     <string name="tenPercent">10%</string>
     <string name="fifteenPercent">15%</string>
     <string name="custom">Custom</string>
+    <string name="zeroPercent">0%</string>
 </resources>
