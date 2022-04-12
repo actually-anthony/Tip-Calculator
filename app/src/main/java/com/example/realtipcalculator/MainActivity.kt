@@ -1,8 +1,11 @@
 package com.example.realtipcalculator
 
+import android.app.Activity
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.TextView
 import com.example.realtipcalculator.databinding.ActivityMainBinding
@@ -19,69 +22,87 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        binding.calculateButton.setOnClickListener{calculateSubtotal()}
-        binding.zeroPercentButton.setOnClickListener{
+        //TODO: Close keyboard after button press or enter
+        binding.zeroPercentButton.setOnClickListener {
             calculateSubtotal()
-            calculateTip(0.0)}
-        binding.tenPercentButton.setOnClickListener{
+            calculateTip(0.0)
+            calculateFinalBill(0.0)
+        }
+        binding.tenPercentButton.setOnClickListener {
             calculateSubtotal()
             calculateTip(0.1)
-            calculateFinalBill(0.1)}
-        binding.fifthteenPercentButton.setOnClickListener{
+            calculateFinalBill(0.1)
+        }
+        binding.fifthteenPercentButton.setOnClickListener {
             calculateSubtotal()
-            calculateTip(0.15)}
-//        binding.customPercentButton.setOnClickListener{
-//            calculateSubtotal()
-//            calculateTip(0.0)}
+            calculateTip(0.15)
+            calculateFinalBill(0.15)
+        }
+        binding.twentyPercentButton.setOnClickListener {
+            calculateSubtotal()
+            calculateTip(0.2)
+            calculateFinalBill(0.2)
+        }
 
     }
 
-//Using binding for subtotalbill results in .text being editable
+    //Using binding for subtotalbill results in .text being editable
     // Hard to change string to editable
-    private fun calculateSubtotal(){
+    private fun calculateSubtotal() {
         val subTotalBill = findViewById<TextView>(R.id.subtotal_bill_edit_text)
         // return if input is empty
         val totalBill = getTotal() ?: return
-        val subTotal = totalBill/1.13
+        val subTotal = totalBill / 1.13
         subTotalBill.text = NumberFormat.getCurrencyInstance().format(subTotal)
     }
 
+    private fun getSubtotal(): Double? {
+        val subtotal = findViewById<TextView>(R.id.subtotal_bill_edit_text).text.toString()
+        // editable cannot use toDouble, so it requires toString() first
+        return subtotal.toDoubleOrNull()
+    }
+
     // returns a double or null
-    private fun getTotal(): Double?{
+    private fun getTotal(): Double? {
         val stringInTextField = findViewById<TextView>(R.id.total_bill_edit_text).text.toString()
         return stringInTextField.toDoubleOrNull()
     }
 
 
-    private fun calculateTip(tipPercent: Double){
-        Log.i("Anth","I made it here")
+    private fun calculateTip(tipPercent: Double) {
         val totalBill = getTotal() ?: return
-        val tip = NumberFormat.getCurrencyInstance().format(totalBill * tipPercent)
 
-        binding.tipPercentDisplay.text = when (tipPercent){
+        binding.tipPercentDisplay.text = when (tipPercent) {
             0.00 -> "Tip Selected: 0%"
-            else -> "Tip Selected: ${NumberFormat.getPercentInstance(Locale.CANADA).format(tipPercent)}"
+            else -> "Tip Selected: ${
+                NumberFormat.getPercentInstance(Locale.CANADA).format(tipPercent)
+            }"
         }
 
     }
 
-    private fun calculateFinalBill(tipPercent: Double){
+    private fun calculateFinalBill(tipPercent: Double) {
+
         val totalBill = getTotal() ?: return
-        val finalBill = totalBill * (1+tipPercent)
-        val tip = totalBill * tipPercent
+        val subtotalBill = totalBill/1.13
 
-        binding.tipText.text = "Tip amount: ${NumberFormat.getCurrencyInstance().format(tip)}"
-        binding.finalTotalText.text = "Total bill with tip: ${NumberFormat.getCurrencyInstance().format(finalBill)}"
+        // tip before tax
+        var tip: Double = if (binding.realTipSwitch.isChecked) {
+            subtotalBill * tipPercent
+        } else {
+            totalBill * tipPercent
+        }
 
+        if (binding.roundUpSwitch.isChecked) {
+            tip = kotlin.math.ceil(tip)
+        }
+
+        val tipText = "Tip amount: ${NumberFormat.getCurrencyInstance().format(tip)}"
+        val totalText = "Total bill with tip: ${NumberFormat.getCurrencyInstance().format(totalBill + tip)}"
+
+        binding.tipText.text = tipText
+        binding.finalTotalText.text = totalText
     }
-
-
-
-
-
-    //TODO: tip percentage text view
-    //TODO: Real tip and Round up
-    //TODO: Close keyboard after pressing calculate
 
 
 

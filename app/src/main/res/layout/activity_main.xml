@@ -104,19 +104,18 @@
         android:id="@+id/fifthteen_percent_button"
         style="@style/Widget.RealTipCalculator.Button.OutlinedButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/custom_percent_button"
+        app:layout_constraintEnd_toStartOf="@id/twenty_percent_button"
         app:layout_constraintTop_toBottomOf="@id/ten_percent_button"
         android:layout_marginEnd="15dp"
         android:text="@string/fifteenPercent"
         />
     <Button
-        android:id="@+id/custom_percent_button"
+        android:id="@+id/twenty_percent_button"
         style="@style/Widget.RealTipCalculator.Button.OutlinedButton"
         app:layout_constraintStart_toEndOf="@id/fifthteen_percent_button"
         app:layout_constraintTop_toTopOf="@id/fifthteen_percent_button"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="32sp"
-        android:text="@string/custom"
+        android:text="20%"
         />
 
     <Button
