@@ -25,7 +25,8 @@ class MainActivity : AppCompatActivity() {
             calculateTip(0.0)}
         binding.tenPercentButton.setOnClickListener{
             calculateSubtotal()
-            calculateTip(0.1)}
+            calculateTip(0.1)
+            calculateFinalBill(0.1)}
         binding.fifthteenPercentButton.setOnClickListener{
             calculateSubtotal()
             calculateTip(0.15)}
@@ -35,12 +36,13 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+//Using binding for subtotalbill results in .text being editable
+    // Hard to change string to editable
     private fun calculateSubtotal(){
         val subTotalBill = findViewById<TextView>(R.id.subtotal_bill_edit_text)
         // return if input is empty
         val totalBill = getTotal() ?: return
         val subTotal = totalBill/1.13
-
         subTotalBill.text = NumberFormat.getCurrencyInstance().format(subTotal)
     }
 
@@ -50,24 +52,32 @@ class MainActivity : AppCompatActivity() {
         return stringInTextField.toDoubleOrNull()
     }
 
+
     private fun calculateTip(tipPercent: Double){
         Log.i("Anth","I made it here")
         val totalBill = getTotal() ?: return
         val tip = NumberFormat.getCurrencyInstance().format(totalBill * tipPercent)
 
         binding.tipPercentDisplay.text = when (tipPercent){
-            0.00 -> "No Tip"
+            0.00 -> "Tip Selected: 0%"
             else -> "Tip Selected: ${NumberFormat.getPercentInstance(Locale.CANADA).format(tipPercent)}"
         }
 
     }
 
-    private fun test(value: Float){
-//        val tipSlider = findViewById<Slider>(R.id.tip_slider)
-        val tipDisplay = findViewById<TextView>(R.id.tip_text)
-//        tipDisplay.text = tipSlider.value.toString()
+    private fun calculateFinalBill(tipPercent: Double){
+        val totalBill = getTotal() ?: return
+        val finalBill = totalBill * (1+tipPercent)
+        val tip = totalBill * tipPercent
+
+        binding.tipText.text = "Tip amount: ${NumberFormat.getCurrencyInstance().format(tip)}"
+        binding.finalTotalText.text = "Total bill with tip: ${NumberFormat.getCurrencyInstance().format(finalBill)}"
 
     }
+
+
+
+
 
     //TODO: tip percentage text view
     //TODO: Real tip and Round up
