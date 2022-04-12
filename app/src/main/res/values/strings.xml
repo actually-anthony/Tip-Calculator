@@ -9,5 +9,4 @@
     <string name="custom">Custom</string>
     <string name="zeroPercent">0%</string>
     <string name="total_bill_with_tip">Total Bill with Tip:</string>
-    <string name="final_tip"> Tip amount: %s </string>
 </resources>

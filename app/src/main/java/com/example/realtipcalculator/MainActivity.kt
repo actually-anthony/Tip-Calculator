@@ -5,6 +5,8 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.TextView
@@ -22,7 +24,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //TODO: Close keyboard after button press or enter
+        //close keyboard after entering
+        binding.totalBillEditText.setOnKeyListener{view, keyCode, _ -> handleKeyEvent(view, keyCode)}
+
+        //TODO: Close keyboard after pressing button
         binding.zeroPercentButton.setOnClickListener {
             calculateSubtotal()
             calculateTip(0.0)
@@ -46,6 +51,16 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun handleKeyEvent(view: View, keyCode: Int): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_ENTER) {
+            // Hide the keyboard
+            val inputMethodManager =
+                getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+            return true
+        }
+        return false
+    }
     //Using binding for subtotalbill results in .text being editable
     // Hard to change string to editable
     private fun calculateSubtotal() {
@@ -102,6 +117,8 @@ class MainActivity : AppCompatActivity() {
 
         binding.tipText.text = tipText
         binding.finalTotalText.text = totalText
+
+
     }
 
 
