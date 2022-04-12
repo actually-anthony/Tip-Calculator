@@ -16,6 +16,9 @@ import org.w3c.dom.Text
 import java.text.NumberFormat
 import java.util.*
 
+//TODO: Close keyboard after pressing button
+//TODO: Allow switches to change the current value rather than pressing the percentage
+
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
@@ -27,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         //close keyboard after entering
         binding.totalBillEditText.setOnKeyListener{view, keyCode, _ -> handleKeyEvent(view, keyCode)}
 
-        //TODO: Close keyboard after pressing button
         binding.zeroPercentButton.setOnClickListener {
             calculateSubtotal()
             calculateTip(0.0)
